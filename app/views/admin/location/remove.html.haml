@@ -1,0 +1,20 @@
+%h1 Remove Location
+
+%p
+  Are you sure you want to 
+  %strong.warning permanently remove
+  the following location?
+
+%table.index#locations{:cellpadding=>0, :cellspacing=>0, :border=>0}
+  %tbody
+    %tr.node.level-1
+      %td.snippet
+        = image('location', :alt => "location-icon")
+        %span.title= @location.name
+        %small.info= @location.full_address
+
+- form_tag do
+  %p.buttons
+    %input.button{:type=>"submit", :value=>"Delete location"}/
+    or
+    = link_to 'Cancel', location_index_url

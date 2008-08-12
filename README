@@ -1,0 +1,10 @@
+= Location
+
+== Introduction
+
+Location is a plugin that will allow you to create relatively robust list of locations (stores, churches, etc.). This uses the Directory extension by Loren Johnson as a starting point but makes a number of different decisions. First it uses Geokit (http://geokit.rubyforge.org) to handle the heavy lifting. Second, the JavaScript is completely rewritten to use version 2 of the Google Maps API and to make some additional. 
+
+== Geokit Modifications
+
+* To get the Geokit libraries to load, I had to modify the requires to use the full path. /geokit/mappable.rb now has require File.dirname(__FILE__) + '/defaults'
+* All references to the configuration values have been changed to use Radiant::Config

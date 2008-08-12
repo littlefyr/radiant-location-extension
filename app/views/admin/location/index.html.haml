@@ -1,0 +1,20 @@
+%h1
+  Locations
+%p
+  You can add locations that can be shown or searched for on a page of type Location
+%table#snippets.index{ :cellspacing => "0", :border => "0", :cellpadding => "0" }
+  %thead
+    %tr
+      %th.snippet
+        Location
+      %th.modify
+        Modify
+  %tbody
+    - if @locations.length > 0
+    = render :partial => "location", :collection => @locations
+    - else
+    %td.note{ :colspan => "2" }
+      No Locations
+    - end
+%p
+  = link_to image('new-location'), location_new_url
