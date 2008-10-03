@@ -53,10 +53,10 @@ class LocationPage < Page
   tag "location:count" do |tag|
     tag.locals.locations.length
   end
-  tag "location:each:has_next?" do |tag| 
+  tag "location:has_next?" do |tag| 
     (tag.locals.locations.length - tag.locals.location_index) > 1
   end
-  tag "location:each:index" do |tag| 
+  tag "location:index" do |tag| 
     tag.locals.location_index
   end
 
@@ -83,19 +83,21 @@ class LocationPage < Page
 
   desc %{Allows you to use page tags (such as <r:slug>, <r:title>, etc.) for the page associated with the location.}
   tag "location:page" do |tag|
-    if tag.locals.location.page?
-      tag.locals.page = Page.find_by_path tag.locals.location.page
+    if tag.locals.location.page_path?
+      tag.locals.page = Page.find_by_url tag.locals.location.page_path
       tag.expand
     end
   end
   tag "location:unless_page" do |tag|
-    unless Page.find_by_path tag.locals.location.page
+    unless Page.find_by_url tag.locals.location.page_path
       tag.expand
     end
   end
   tag "location:if_page" do |tag| 
-    return unless tag.locals.location.page?
-    if Page.find_by_path tag.locals.location.page
+    return unless tag.locals.location.page_path?
+    printf tag.locals.location.page_path
+    
+    if Page.find_by_url tag.locals.location.page_path
       tag.expand
     end
   end

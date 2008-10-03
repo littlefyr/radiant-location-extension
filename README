@@ -10,3 +10,40 @@ I've made a few modifications to GeoKit to get it to work inside the extension a
 
 * Geokit is included as a library to the extension rather than as a plugin
 * All references to the configuration values have been changed to use Radiant::Config
+
+== Finding Results in space
+
+To process search requests for locations you must create a Location Page. use <r:location> to find and return locations.
+
+The parameters you can use to "find" locations are:
+
+=== start point
+
+The start point is some point in space relative to which we will find locations. This allows a user to say "Find location near Main Street and First Street, My Town, BC, Canada". 
+
+When a start value is specified (using either *address* or *lat*&*lng*), then it will be always be used to calculate a distance to each returned location. If a distance is requested, we will return all the locations with that distance of the start point.
+
+==== *address* 
+
+If supplied, this will be an address that will be geocoded using the configured geocode providers. Once a latitude & longitude are calculated, they form the start point for the request.
+
+==== *lat* & *lng* 
+
+If both parameters are supplied, they are used as the start point. They always take precedence over *address*. 
+
+=== *distance*
+
+When specified, all the locations within this distance of the start point are returned. If no distance is specified, _all_ locations are returned
+
+=== *units*
+
+The units are used for calculating distance from a location to the start point. The default value is "km"
+
+=== *count*
+
+The number of results to return. Defaults to returning ALL results
+
+=== *offset*
+
+The number of the first result to return. This allows you to build pagination into your code
+
