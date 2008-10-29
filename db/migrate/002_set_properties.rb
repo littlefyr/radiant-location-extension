@@ -1,9 +1,7 @@
 class SetProperties < ActiveRecord::Migration
   def self.up
-    create_table :locations do |t|
-       config_properties.sort.each do |i, j|
-          Radiant::Config[i[0]] = i[1] 
-        end
+    config_properties.sort.each do |i, j|
+      Radiant::Config[i[0]] = i[1] 
     end
   end
 
