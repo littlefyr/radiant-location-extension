@@ -1,4 +1,4 @@
-class CreateLocations < ActiveRecord::Migration
+class SetProperties < ActiveRecord::Migration
   def self.up
     create_table :locations do |t|
        config_properties.sort.each do |i, j|
