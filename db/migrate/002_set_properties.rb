@@ -1,13 +1,13 @@
 class SetProperties < ActiveRecord::Migration
   def self.up
     config_properties.sort.each do |i, j|
-      Radiant::Config[i[0]] = i[1] 
+      Radiant::Config[i] = j
     end
   end
 
   def self.down
      config_properties.sort.each do |i, j|
-        Radiant::Config[i[0]] = nil
+        Radiant::Config[i] = nil
       end
   end
   private
