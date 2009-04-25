@@ -1,3 +1,3 @@
-class Admin::LocationController < Admin::AbstractModelController
+class Admin::LocationController < Admin::ResourceController
   model_class Location
 end
