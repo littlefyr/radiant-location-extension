@@ -1,0 +1,6 @@
+%tr.node.level-1
+  %td.page
+    = link_to image("location", :class => "icon", :alt => 'page-icon', :title => '') + '<span class="title">' + h(location.name) +'</span>', edit_admin_location_url(location)
+    %small.info
+      = h location.full_address
+  %td.remove= link_to image('remove', :alt => 'remove location'), remove_admin_location_path(location)

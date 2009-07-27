@@ -13,8 +13,8 @@
         %span.title= @location.name
         %small.info= @location.full_address
 
-- form_tag do
+- form_tag admin_location_path(@location), :method => :delete do
   %p.buttons
     %input.button{:type=>"submit", :value=>"Delete location"}/
     or
-    = link_to 'Cancel', location_index_url
+    = link_to 'Cancel', admin_locations_url

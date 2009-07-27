@@ -11,10 +11,10 @@
         Modify
   %tbody
     - if @locations.length > 0
-    = render :partial => "location", :collection => @locations
+      = render :partial => "location", :collection => @locations
     - else
-    %td.note{ :colspan => "2" }
-      No Locations
-    - end
+      %tr
+        %td.note{ :colspan => "2" }
+          No Locations
 %p
-  = link_to image('new-location'), location_new_url
+  = link_to image('new-location'), new_admin_location_url

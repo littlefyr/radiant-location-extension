@@ -101,10 +101,10 @@ class LocationPage < Page
       tag.expand
     end
   end
-  tag "location:map" do |tag| 
-    #content = '<script type="text/javascript" src="http://www.google.com/jsapi?key=#{Radiant::Config['geokit.geocoders.google']}"></script>'
-    
-  end
+  # tag "location:map" do |tag| 
+  #   #content = '<script type="text/javascript" src="http://www.google.com/jsapi?key=#{Radiant::Config['geokit.geocoders.google']}"></script>'
+  #   
+  # end
 
   def process(request,response)
     # Parameters

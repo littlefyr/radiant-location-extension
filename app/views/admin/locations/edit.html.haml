@@ -5,7 +5,7 @@
     - else
       %h1 Edit Location
   - main.edit_form do
-    - form_tag do
+    - form_tag admin_location_path(@location), :method => :put do
       = hidden_field 'location', 'lock_version'
       = render_region :form_top
       %table.fieldset{:cellpadding=>0, :cellspacing=>0, :border=>0}
@@ -51,7 +51,7 @@
                 %label{:for=>"location_latitude"} Latitude
               %td.field
                 = text_field "location", "lat", :class => 'textbox', :maxlength => 100 
-              %td.help{:rowspan => 3} Required. The latitude and longitude are typically geocoded automatically. However some locations (particularly rural locations) cannot be easily geocoded. If you choose "manual geocoding" you will be able to set the latitude and longitude manually.
+              %td.help{:rowspan => 3} Auto-generated. Required if 'Manually Geocode this Location' is selected. The latitude and longitude are typically geocoded automatically. However some locations (particularly rural locations) cannot be easily geocoded. If you choose "manual geocoding" you will be able to set the latitude and longitude manually.
           - form.edit_longitude do
             %tr
               %th.label
@@ -73,5 +73,5 @@
             = save_model_button(@location)
             = save_model_and_continue_editing_button(@location)
             or 
-            = link_to "Cancel", location_index_url
+            = link_to "Cancel",  admin_locations_url
     

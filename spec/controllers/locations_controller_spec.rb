@@ -1,10 +1,10 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe LocationsController do
+describe Admin::LocationsController do
 
   #Delete these examples and add some real ones
-  it "should use LocationsController" do
-    controller.should be_an_instance_of(LocationsController)
+  it "should use Admin::LocationsController" do
+    controller.should be_an_instance_of(Admin::LocationsController)
   end
 
 
