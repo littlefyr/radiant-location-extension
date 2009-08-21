@@ -27,7 +27,7 @@
           - form.edit_full_address do
             %tr
               %th.label
-                %label{:for=>"location_full_address"} Street Address
+                %label{:for=>"location_full_address"} Full Address
               %td.field
                 = text_field "location", "full_address", :class => 'textbox', :maxlength => 100 
               %td.help Required. The address is used for determining the latitude and longitude for searching and showing on the map. the preferred format is: "123 1 Ave, MyCity, AB, Canada, T0M 0R0"
