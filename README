@@ -4,6 +4,15 @@
 
 Location is a plugin that will allow you to create relatively robust list of locations (stores, churches, etc.). This uses the Directory extension by Loren Johnson as a starting point but makes a number of different decisions. First it uses Geokit (http://geokit.rubyforge.org) to handle the heavy lifting. Second, the JavaScript is completely rewritten to use version 2 of the Google Maps API and to make some additional API changes (this is still TODO)
 
+== Settings
+
+You may enable or disable visible features for editing locations by setting these options in your environment:
+
+  Radiant::Config['locations.use_groups?'] = 'true'
+  Radiant::Config['locations.use_website_urls?'] = 'true'
+  Radiant::Config['locations.use_page_paths?'] = 'true'
+  Radiant::Config['locations.allow_manual_geocoding?'] = 'true'
+
 == Geokit Modifications
 
 I've made a few modifications to GeoKit to get it to work inside the extension and to maintain certain Radiant paradigms. 

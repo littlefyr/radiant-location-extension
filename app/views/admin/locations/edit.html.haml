@@ -1,9 +1,6 @@
 - render_region :main do |main|
   - main.edit_header do
-    - if @location.new_record?
-      %h1 New Location
-    - else
-      %h1 Edit Location
+    %h1 Edit Location
   - main.edit_form do
     - form_tag admin_location_path(@location), :method => :put do
       = hidden_field 'location', 'lock_version'
@@ -17,13 +14,6 @@
               %td.field
                 = text_field "location", "name", :class => 'textbox', :maxlength => 100 
               %td.help Required.
-          - form.edit_group do
-            %tr
-              %th.label
-                %label.optional{:for=>"location_group"} Group
-              %td.field
-                = text_field "location", "group", :class => 'textbox', :maxlength => 100 
-              %td.help Optional. Assigning a group allows you to show and search locations within a specific group. 
           - form.edit_full_address do
             %tr
               %th.label
@@ -31,34 +21,43 @@
               %td.field
                 = text_field "location", "full_address", :class => 'textbox', :maxlength => 100 
               %td.help Required. The address is used for determining the latitude and longitude for searching and showing on the map. the preferred format is: "123 1 Ave, MyCity, AB, Canada, T0M 0R0"
+          - form.edit_group do
+            - if config['locations.use_groups?']
+              %tr
+                %th.label
+                  %label.optional{:for=>"location_group"} Group
+                %td.field
+                  = text_field "location", "group", :class => 'textbox', :maxlength => 100 
+                %td.help Optional. Assigning a group allows you to show and search locations within a specific group. 
           - form.edit_website_url do
-            %tr
-              %th.label
-                %label.optional{:for=>"location_website_url"} Website URL
-              %td.field
-                = text_field "location", "website_url", :class => 'textbox', :maxlength => 100 
-              %td.help Optional.
+            - if config['locations.use_website_urls?']
+              %tr
+                %th.label
+                  %label.optional{:for=>"location_website_url"} Website URL
+                %td.field
+                  = text_field "location", "website_url", :class => 'textbox', :maxlength => 100 
+                %td.help Optional.
           - form.edit_page_path do
-            %tr
-              %th.label
-                %label{:for=>"location_page_path"} Page path
-              %td.field
-                = text_field "location", "page_path", :class => 'textbox', :maxlength => 100 
-              %td.help Required. This is the path to the page that contains the info_box part for this location
-          - form.edit_latitude do
-            %tr
-              %th.label
-                %label{:for=>"location_latitude"} Latitude
-              %td.field
-                = text_field "location", "lat", :class => 'textbox', :maxlength => 100 
-              %td.help{:rowspan => 3} Auto-generated. Required if 'Manually Geocode this Location' is selected. The latitude and longitude are typically geocoded automatically. However some locations (particularly rural locations) cannot be easily geocoded. If you choose "manual geocoding" you will be able to set the latitude and longitude manually.
-          - form.edit_longitude do
-            %tr
-              %th.label
-                %label{:for=>"location_longitude"} Longitude
-              %td.field
-                = text_field "location", "lng", :class => 'textbox', :maxlength => 100 
-            - form.edit_manual_geocode do
+            - if config['locations.use_page_paths?']
+              %tr
+                %th.label
+                  %label.optional{:for=>"location_page_path"} Page path
+                %td.field
+                  = text_field "location", "page_path", :class => 'textbox', :maxlength => 100 
+                %td.help Optional. Associate a page on your site with this location. Example: /locations/office
+          - form.edit_geocode do
+            - if config['locations.allow_manual_geocoding?']
+              %tr
+                %th.label
+                  %label{:for=>"location_latitude"} Latitude
+                %td.field
+                  = text_field "location", "lat", :class => 'textbox', :maxlength => 100 
+                %td.help{:rowspan => 3} Auto-generated. Required if 'Manually Geocode this Location' is selected. The latitude and longitude are typically geocoded automatically. However some locations (particularly rural locations) cannot be easily geocoded. If you choose "manual geocoding" you will be able to set the latitude and longitude manually.
+              %tr
+                %th.label
+                  %label{:for=>"location_longitude"} Longitude
+                %td.field
+                  = text_field "location", "lng", :class => 'textbox', :maxlength => 100 
               %tr
                 %th.label &nbsp;
                 %td.field

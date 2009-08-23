@@ -40,7 +40,7 @@ class LocationExtension < Radiant::Extension
     returning OpenStruct.new do |locations|
       locations.edit = Radiant::AdminUI::RegionSet.new do |edit|
         edit.main.concat %w{edit_header edit_form}
-        edit.form.concat %w{edit_title edit_group edit_full_address edit_website_url edit_page_path edit_latitude edit_longitude edit_manual_geocode}
+        edit.form.concat %w{edit_title edit_group edit_full_address edit_website_url edit_page_path edit_geocode}
         edit.form_bottom.concat %w{edit_timestamp edit_buttons}
       end
       locations.new = locations.edit.clone
