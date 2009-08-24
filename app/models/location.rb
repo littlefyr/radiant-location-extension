@@ -5,6 +5,8 @@ class Location < ActiveRecord::Base
 
   acts_as_mappable :default_units => :kms
   before_validation :geocode_address
+  
+  default_scope :order => 'name'
   private
   def geocode_address
     unless self.manual_geocode
