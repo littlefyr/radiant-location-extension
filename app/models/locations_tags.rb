@@ -15,20 +15,6 @@ module LocationsTags
     * *group*       -- When supplied, it will show only those locations in the given group
   }
   tag "locations" do |tag|
-    
-    
-    if @lat.blank? || @lng.blank?
-      unless @origin.blank?
-        geocode = MultiGeocoder.geocode(@origin)
-        logger.debug("geocode: #{geocode}")
-        @origin_geo = geocode if geocode.success
-      else
-        @origin_geo = nil;
-      end
-    else
-      @origin_geo = [@lat.to_f, @lng.to_f]
-    end
-
     options = {}
     unless tag.attr['limit'].blank?
       options[:limit] = tag.attr['limit'].to_i.to_s
@@ -36,7 +22,7 @@ module LocationsTags
     end
     
     unless tag.attr["group"].blank?
-      @options[:conditions] = {:group => tag.attr['group']}
+      options[:conditions] = {:group => tag.attr['group']}
     end
 
     tag.locals.locations = Location.find(:all, @options)
