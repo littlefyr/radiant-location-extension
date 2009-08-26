@@ -7,6 +7,9 @@
     %tr
       %th.snippet
         Location
+      - if config['locations.use_groups?'] && !@locations.blank?
+        %th
+          Group
       %th.modify
         Modify
   %tbody
