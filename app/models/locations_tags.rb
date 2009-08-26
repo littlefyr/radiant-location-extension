@@ -25,7 +25,7 @@ module LocationsTags
       options[:conditions] = {:group => tag.attr['group']}
     end
 
-    tag.locals.locations = Location.find(:all, @options)
+    tag.locals.locations = Location.find(:all, options)
     tag.expand
   end
 
