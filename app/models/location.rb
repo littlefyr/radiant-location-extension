@@ -7,6 +7,8 @@ class Location < ActiveRecord::Base
   before_validation :geocode_address
   
   default_scope :order => 'name'
+  
+  after_save :clear_page_cache
   private
   def geocode_address
     unless self.manual_geocode
@@ -14,5 +16,9 @@ class Location < ActiveRecord::Base
       errors.add(:full_address, "Could not Geocode address") if !geo.success
       self.lat, self.lng = geo.lat,geo.lng if geo.success
     end
+  end
+  
+  def clear_page_cache
+    Radiant::Cache.clear
   end
 end
