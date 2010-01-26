@@ -38,7 +38,11 @@ class LocationFinderPage < Page
     end
   end
   tag "location:distance" do |tag|
-    tag.locals.location.distance
+    
+    pre = tag.attr.include?('precision') ? tag.attr['precision'].to_i : 1
+    
+    "%01.#{pre}f" % (tag.locals.location.distance || 0)
+    
   end
   
   def process(request,response)
