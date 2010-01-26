@@ -24,6 +24,8 @@ module LocationsTags
     unless tag.attr["group"].blank?
       options[:conditions] = {:group => tag.attr['group']}
     end
+    
+    options = options.merge(@options)
 
     tag.locals.locations = Location.find(:all, options)
     tag.expand
