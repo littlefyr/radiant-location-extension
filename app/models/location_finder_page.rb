@@ -17,13 +17,18 @@ class LocationFinderPage < Page
 
     Attributes:
     * *group*       -- When supplied, it will show only those locations in the given group
+    * *id*          -- When supplied, retrieves the specific location
   }
   tag "location" do |tag|
-    unless tag.attr["group"].blank?
-      @options[:conditions] = {:group => tag.attr['group']}
-    end
+    if tag.attr["id"].blank?
+      unless tag.attr["group"].blank?
+        @options[:conditions] = {:group => tag.attr['group']}
+      end
 
-    tag.locals.location = Location.find(:first, @options)
+      tag.locals.location = Location.find(:first, @options)
+    else
+      tag.locals.location = Location.find_by_id tag.attr["id"].to_i
+    end
     tag.expand if tag.locals.location
   end
 
@@ -41,7 +46,9 @@ class LocationFinderPage < Page
     
     pre = tag.attr.include?('precision') ? tag.attr['precision'].to_i : 1
     
-    "%01.#{pre}f" % (tag.locals.location.distance || 0)
+    pre
+    
+    # "%0.#{pre}f" % (tag.locals.location.distance || 0)
     
   end
   
