@@ -58,6 +58,9 @@ module LocationsTags
     tag.expand if tag.locals.location
   end
   tag "location" do |tag|
+    unless tag.attr["id"].blank?
+      tag.locals.location = Location.find(tag.attr["id"].to_i)
+    end
     tag.expand if tag.locals.location
   end
   
